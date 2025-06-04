@@ -1,0 +1,602 @@
+body {
+    font-family: 'Georgia', serif;
+    background-color: #f8f5f0;
+    color: #2e2c2b;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #5c3d2e !important;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+a {
+    text-decoration: none;
+    color: #5c3d2e;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.btn-primary {
+    background-color: #8a6d3b;
+    border: none;
+    font-weight: bold;
+    font-family: 'Georgia', serif;
+}
+
+.btn-primary:hover {
+    background-color: #7b5d30;
+}
+
+.dropdown-menu {
+    min-width: 180px;
+    background-color: #fdf8f2;
+    border: 1px solid #d8cbb4;
+}
+
+.dropdown-item:hover {
+    background-color: #f0e6d6;
+}
+
+.navbar img {
+    border: 2px solid #8a6d3b;
+    padding: 1px;
+    border-radius: 6px;
+}
+
+main.container {
+    padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    .dropdown-menu {
+        font-size: 0.9rem;
+    }
+}
+
+/*---------------------------- Головна сторінка ----------------------------*/
+
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    background-color: #f8f5f0;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.landing-title span {
+    color: #5c3d2e;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.landing-subtitle {
+    font-size: 1.2rem;
+    color: #4d4b49;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+/* Hero-секція */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background: linear-gradient(135deg, #eae2d6, #f6f1ea);
+    color: #3e3b39;
+    text-align: center;
+    padding: 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Palatino Linotype', serif;
+}
+
+.typing-text {
+    font-size: 2.2rem;
+    font-weight: bold;
+    border-right: 3px solid rgba(94, 82, 73, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 2.0s steps(18, end) forwards, blink .75s step-end infinite;
+    color: #5c3d2e;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 38%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.hero-subtitle {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #5c3d2e;
+    animation: fadeInUp 2s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/*---------------------------- Сторінка "Про музей" ----------------------------*/
+
+.about-card {
+    max-width: 900px;
+    margin: 3rem auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 2rem;
+    animation: fadeInUp 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-text {
+    flex: 1;
+    padding: 1rem;
+}
+
+.about-text h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #5c3d2e;
+}
+
+.about-text h2 {
+    color: #7a6248;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    color: #4f4d4b;
+}
+
+.about-image {
+    flex: 1;
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.05);
+}
+
+.about-telegram {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.about-telegram img {
+    width: 48px;
+    height: 48px;
+    transition: transform 0.3s ease;
+}
+
+.about-telegram img:hover {
+    transform: scale(1.2);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/*-------------------------- Профіль користувача (перегляд) --------------------------*/
+
+.profile-view {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, #f8f5f0, #f3ede4);
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    padding: 2rem;
+    font-family: 'Georgia', serif;
+}
+
+.profile-view h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #5a4633;
+    text-align: center;
+}
+
+.profile-view .list-group-item {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ded2bd;
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: #3d3a37;
+}
+
+.profile-view .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.profile-view strong {
+    display: inline-block;
+    min-width: 160px;
+    color: #6b4c34;
+}
+
+.profile-view .btn-primary {
+    background-color: #8a6d3b;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.profile-view .btn-primary:hover {
+    background-color: #7b5d30;
+}
+
+/*-------------------------- Форма редагування профілю --------------------------*/
+
+.profile-edit {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #fdfaf6;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    font-family: 'Georgia', serif;
+}
+
+.profile-edit h1,
+.profile-edit h5 {
+    color: #5a4633;
+    font-weight: bold;
+}
+
+.profile-edit .form-label {
+    font-weight: bold;
+    color: #5c3d2e;
+}
+
+.profile-edit input {
+    border-radius: 10px;
+    background-color: #fcf9f3;
+    border: 1px solid #d8cbb4;
+    transition: border-color 0.3s ease;
+}
+
+.profile-edit input:focus {
+    border-color: #a1865c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(161, 134, 92, 0.3);
+}
+
+.profile-edit .btn-success {
+    background-color: #7a5e3b;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.profile-edit .btn-success:hover {
+    background-color: #634d2f;
+}
+
+.profile-edit .btn-secondary {
+    background-color: #b5aa9a;
+    border: none;
+}
+
+.profile-edit .btn-secondary:hover {
+    background-color: #a09587;
+}
+
+.profile-edit .alert-danger {
+    background-color: #fff0f0;
+    color: #8b3d3d;
+    border: 1px solid #e0c0c0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/*-------------------------- Слайдер --------------------------*/
+ 
+.flickity-slider {
+  display: flex;
+  gap: 20px;
+}
+.carousel-cell {
+  width: 50%;
+  margin-right: 10px;
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.carousel-cell img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 0rem;
+  width: 70%;
+}
+/*-------------------------- форма з виводом епох --------------------------*/
+
+
+.home-periods-page .periods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-periods-page .period-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.home-periods-page .period-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.home-periods-page .period-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.home-periods-page .period-card h3 {
+    font-size: 1.2rem;
+    margin: 10px;
+    color: #2c3e50;
+}
+
+.home-periods-page .period-card p {
+    margin: 0 10px 10px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.home-periods-page .pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.home-periods-page .pagination a,
+.home-periods-page .pagination strong {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 3px;
+    text-decoration: none;
+    color: #2c3e50;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.home-periods-page .pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.home-periods-page .pagination strong {
+    background-color: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+}
+/*------------------форма експоната-------------------------------------*/
+
+.exhibit-container {
+        max-width: 700px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .exhibit-container h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .exhibit-container img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .exhibit-container p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: #555;
+        white-space: pre-line; /* замість nl2br можна лишити так */
+        margin-bottom: 25px;
+    }
+    form {
+        background: #fff;
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+    }
+    form label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+        color: #222;
+    }
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: gold;
+}
+
+    textarea {
+        width: 100%;
+        resize: vertical;
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.filter-form label {
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.filter-form select,
+.filter-form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    min-width: 200px;
+}
+
+.filter-form .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.filter-form .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filter-form .btn-primary:hover {
+    background-color: #0056b3;
+}

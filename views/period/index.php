@@ -1,0 +1,50 @@
+<?php
+use core\Core;
+use models\Exhibits;
+
+$this->Title = 'Головна';
+$db = Core::get()->db;
+?><div class="home-periods-page">
+    <h1>Історичні епохи</h1>
+
+    <?php if (!empty($periods)): ?>
+        <div class="periods-grid">
+            <?php foreach ($periods as $period): ?>
+                <div class="period-card" onclick="location.href='/MuseumShowcase/period/show/<?= $period['id'] ?>'">
+                    <img src="/MuseumShowcase/<?= htmlspecialchars($period['image_path']) ?>" alt="<?= htmlspecialchars($period['name']) ?>">
+                    <h3><?= htmlspecialchars($period['name']) ?></h3>
+                    <h6><?= htmlspecialchars($period['Section']) ?></h6>
+                    <p><?= htmlspecialchars($period['TimePeriod']) ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <?php if ($totalPages > 1): ?>
+            <div class="pagination">
+                <?php
+                $range = 2;
+                if ($page == 1)
+                    echo "<strong>1</strong> ";
+                else
+                    echo "<a href='/MuseumShowcase/period/index/1'>1</a> ";
+                if ($page > $range + 2) echo "... ";
+                for ($i = max(2, $page - $range); $i <= min($totalPages - 1, $page + $range); $i++) {
+                    if ($i == $page)
+                        echo "<strong>$i</strong> ";
+                    else
+                        echo "<a href='/MuseumShowcase/period/index/$i'>$i</a> ";
+                }
+                if ($page < $totalPages - $range - 1) echo "... ";
+                if ($totalPages > 1) {
+                    if ($page == $totalPages)
+                        echo "<strong>$totalPages</strong>";
+                    else
+                        echo "<a href='/MuseumShowcase/period/index/$totalPages'>$totalPages</a>";
+                }
+                ?>
+            </div>
+        <?php endif; ?>
+    <?php else: ?>
+        <p>Наразі історичних епох не знайдено. Спробуйте пізніше.</p>
+    <?php endif; ?>
+</div>
