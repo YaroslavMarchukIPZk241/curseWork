@@ -4,17 +4,28 @@ use models\Exhibits;
 
 $this->Title = 'Головна';
 $db = Core::get()->db;
-?><div class="home-periods-page">
+?>
+
+<div class="home-periods-page">
     <h1>Історичні епохи</h1>
 
     <?php if (!empty($periods)): ?>
         <div class="periods-grid">
             <?php foreach ($periods as $period): ?>
+                <?php
+                    $imageFileName = basename($period['image_path'] ?? '');
+                    $relativePath = "/museumShowcase/static/uploads/Epoch/" . $imageFileName;
+                    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . $relativePath;
+
+                    $imagePath = (empty($period['image_path']) || !file_exists($absolutePath))
+                        ? '/museumShowcase/assets/img/fallback.jpg'
+                        : $relativePath;
+                ?>
                 <div class="period-card" onclick="location.href='/MuseumShowcase/period/show/<?= $period['id'] ?>'">
-                    <img src="/MuseumShowcase/<?= htmlspecialchars($period['image_path']) ?>" alt="<?= htmlspecialchars($period['name']) ?>">
-                    <h3><?= htmlspecialchars($period['name']) ?></h3>
-                    <h6><?= htmlspecialchars($period['Section']) ?></h6>
-                    <p><?= htmlspecialchars($period['TimePeriod']) ?></p>
+                    <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($period['name'] ?? 'Назва епохи відсутня') ?>">
+                    <h3><?= !empty($period['name']) ? htmlspecialchars($period['name']) : 'Назва епохи відсутня' ?></h3>
+                    <h6><?= !empty($period['Section']) ? htmlspecialchars($period['Section']) : 'Місце знаходження відсутнє' ?></h6>
+                    <p><?= !empty($period['TimePeriod']) ? htmlspecialchars($period['TimePeriod']) : 'Період відсутній' ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -11,6 +11,8 @@ use models\Session;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/MuseumShowcase/assets/js/script.js"></script>
     <title><?= $Title ?? 'MuseumShowcase' ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -18,6 +20,9 @@ use models\Session;
     <link rel="stylesheet" href="/MuseumShowcase/assets/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <base href="/MuseumShowcase/">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </head>
 <body>
@@ -25,7 +30,8 @@ use models\Session;
     <nav class="navbar navbar-expand-lg navbar-light container">
         <a class="navbar-brand text-primary fw-bold" href="/MuseumShowcase">Museum-travel for millennia</a>
         <a class="navbar-brand text-primary fw-bold" href="/MuseumShowcase/period">Експонати</a>
-
+        <a class="navbar-brand text-primary fw-bold" href="/MuseumShowcase/tickets">Квитки</a>
+        <a class="navbar-brand text-primary fw-bold" href="/MuseumShowcase/about">Про нас</a>
         <div class="ms-auto">
             <?php if(Users::isUserLogged()): ?>
                 <!-- Авторизований -->
@@ -35,6 +41,7 @@ use models\Session;
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/MuseumShowcase/profile">Мій профіль</a></li>
+                        <li><a class="dropdown-item" href="/MuseumShowcase/promoCode">Промо коди</a></li>
                         <?php if(Users::isCurrentUserAdmin()): ?>
                             <li><a class="dropdown-item" href="/MuseumShowcase/admin/panel">Адміністрування</a></li>
                         <?php endif; ?>
@@ -44,7 +51,6 @@ use models\Session;
                 </div>
             <?php else: ?>
                 <!-- Гість -->
-                <a class="btn btn-link text-primary me-2" href="/MuseumShowcase/home/about">Про автора</a>
                 <a class="btn btn-primary" href="/MuseumShowcase/profile/login">Вхід</a>
                 <a class="btn btn-primary" href="/MuseumShowcase/profile/register">Реєстрація</a>
             <?php endif; ?>
@@ -55,6 +61,9 @@ use models\Session;
     <main class="container">
         <?= $Content ?? '' ?>
     </main>
-
+ <footer>
+        2025 Всі права захищені.
+    </footer>
 </body>
+
 </html>

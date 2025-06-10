@@ -107,6 +107,14 @@ if (is_array($where)) {
         $sth->execute();
         return $sth->rowCount(); 
         }
+        
+public function query(string $sql)
+{
+    $sth = $this->pdo->prepare($sql);
+    $sth->execute();
+    return $sth->fetchAll() ?: [];
+}
+
 public function update($table, $row_to_update, $where)
 {
     $where_string = $this->where($where); 
@@ -121,7 +129,6 @@ public function update($table, $row_to_update, $where)
 
     $sth = $this->pdo->prepare($sql);
 
-    // Замість ":where_{$key}" прив’язуємо ":{$key}" (як у where())
     foreach($where as $key => $value) {
         $sth->bindValue(":{$key}", $value);
     }

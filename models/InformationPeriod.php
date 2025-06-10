@@ -1,34 +1,44 @@
 <?php
- namespace models;
+namespace models;
 
 use core\Model;
 use core\Core;
 
-/**
- * @property int $id
- * @property string $name
- * @property string $link
- * @property int $Period_id
- * @property string $information
- */
 class InformationPeriod extends Model
 {
     public static $tableName = 'information_period';
 
-    public static function findByPeriodId($periodId)
+    public static function findAll()
     {
         $db = Core::get()->db;
-        $rows = $db->select(self::$tableName, '*', ['Period_id' => $periodId]);
-
-        $objects = [];
+        $rows = $db->select('information_period'); 
+        $items = [];
         foreach ($rows as $row) {
-            $obj = new self();
-            foreach ($row as $key => $value) {
-                $obj->$key = $value;
-            }
-            $objects[] = $obj;
+            $item = new self();
+            $item->id = $row['id'];
+            $item->name = $row['name'];
+            $item->link = $row['link'];
+            $item->information = $row['information'];
+            $item->Period_id = $row['Period_id'];
+            $items[] = $item;
         }
+        return $items;
+    }
 
-        return $objects;
+    public static function findByPeriodId(int $periodId)
+    {
+        $db = Core::get()->db;
+        $rows = $db->select('information_period', ['*'], ['Period_id' => $periodId]);
+        $items = [];
+        foreach ($rows as $row) {
+            $item = new self();
+            $item->id = $row['id'];
+            $item->name = $row['name'];
+            $item->link = $row['link'];
+            $item->information = $row['information'];
+            $item->Period_id = $row['Period_id'];
+            $items[] = $item;
+        }
+        return $items;
     }
 }

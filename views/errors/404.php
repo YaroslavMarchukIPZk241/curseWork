@@ -2,19 +2,21 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>404 - Сторінка не знайдена</title>
+    
     <style>
         body {
             text-align: center;
             font-family: Arial, sans-serif;
-            margin-top: 100px;
+            margin-top: 50px;
         }
         h1 {
             font-size: 100px;
             color: #e74c3c;
+            margin-bottom: 20px;
         }
         p {
             font-size: 24px;
+            margin-bottom: 30px;
         }
         a {
             margin-top: 20px;
@@ -26,10 +28,16 @@
         a:hover {
             text-decoration: underline;
         }
+        img {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
-    <h1>404</h1>
+
+    <img src="/MuseumShowcase/assets/img/404.png" alt="404 - Сторінка не знайдена">
     <p>На жаль, сторінку не знайдено</p>
     <a href="/MuseumShowcase/home">Повернутись на головну</a>
 </body>

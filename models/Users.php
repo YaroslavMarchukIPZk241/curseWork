@@ -92,4 +92,28 @@ class Users extends Model
         return $user;
     }, $rows);
 }
+public static function DeleteUser($id)
+{
+    $db = Core::get()->db;
+    return $db->delete(self::$tableName, ['id' => $id]);
+}
+public static function CreateUser($data)
+{
+      $db = Core::get()->db;
+    $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
+
+    return $db->insert(self::$tableName, [
+        'username' => $data['username'],
+        'email' => $data['email'],
+        'role' => $data['role'],
+        'password' => $hashedPassword,
+        'created_at' => date('Y-m-d H:i:s')
+    ]);
+}
+public static function countAdmins(): int
+{
+    $db = \core\Core::get()->db;
+    $admins = $db->select(self::$tableName, 'id', ['role' => 'admin']);
+    return count($admins);
+}
 }

@@ -32,8 +32,8 @@ $edit = $edit ?? false;
         <li class="list-group-item"><strong>Ім’я користувача:</strong> <?=htmlspecialchars($user['username'])?></li>
         <li class="list-group-item"><strong>Email:</strong> <?=htmlspecialchars($user['email'])?></li>
         <li class="list-group-item"><strong>Роль:</strong> <?=htmlspecialchars($user['role'])?></li>
-        <li class="list-group-item"><strong>Бонус-код:</strong> <?=htmlspecialchars($user['bonus_code'] ?? 'Немає')?></li>
     </ul>
     <a href="/MuseumShowcase/profile/edit" class="btn btn-primary mt-3">Редагувати</a>
+    <a href="/MuseumShowcase/profile/promo" class="btn btn-primary mt-3">історія промокодів</a>
 </div>
 <?php endif; ?>

@@ -1,0 +1,7 @@
+Array
+(
+    [type] => 64
+    [message] => Cannot redeclare core\DB::$pdo
+    [file] => D:\wamp\www\museumShowcase\core\DB.php
+    [line] => 113
+)

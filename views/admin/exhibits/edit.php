@@ -1,6 +1,6 @@
 <h1>Редагувати експонат</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label>Назва</label>
         <input type="text" name="title" class="form-control" value="<?= htmlspecialchars($exhibit->title) ?>" required>
@@ -35,12 +35,12 @@
 
     <div class="form-group">
         <label>Локація</label>
-        <textarea name="location" class="form-control" rows="2"><?= htmlspecialchars($exhibit->location) ?></textarea>
+        <input type="text" name="location" class="form-control" value="<?= htmlspecialchars($exhibit->location) ?>">
     </div>
 
     <div class="form-group">
         <label>Хто знайшов</label>
-        <textarea name="who_found" class="form-control" rows="2"><?= htmlspecialchars($exhibit->who_found) ?></textarea>
+        <input type="text" name="who_found" class="form-control" value="<?= htmlspecialchars($exhibit->who_found) ?>">
     </div>
 
     <div class="form-group">
@@ -49,8 +49,34 @@
     </div>
 
     <div class="form-group">
-        <label>Зображення (шлях)</label>
-        <textarea name="image_path" class="form-control" rows="2"><?= $exhibit->image_path ? htmlspecialchars($exhibit->image_path) : '' ?></textarea>
+        <label>Поточне зображення</label><br>
+        <?php if ($exhibit->image_path): ?>
+            <img src="<?= htmlspecialchars($exhibit->image_path) ?>" alt="img" style="max-width: 100px;">
+        <?php else: ?>
+            <span>Зображення відсутнє</span>
+        <?php endif; ?>
+    </div>
+
+    <div class="form-group">
+        <label>Завантажити нове зображення</label>
+        <input type="file" name="image" accept="image/*" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Або виберіть існуюче зображення</label>
+        <select name="existing_image" class="form-control">
+            <option value="">-- Не вибрано --</option>
+            <?php
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . 'MuseumShowcase/static/uploads/Exponat/';
+            $files = is_dir($uploadDir) ? scandir($uploadDir) : [];
+            foreach ($files as $file) {
+                if (in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), ['jpg','jpeg','png','gif'])) {
+                    $selected = ($exhibit->image_path && strpos($exhibit->image_path, $file) !== false) ? 'selected' : '';
+                    echo "<option value=\"$file\" $selected>$file</option>";
+                }
+            }
+            ?>
+        </select>
     </div>
 
     <button type="submit" class="btn btn-primary">Оновити</button>

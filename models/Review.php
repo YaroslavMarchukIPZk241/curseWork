@@ -15,8 +15,32 @@ use core\Model;
  */
 class Review extends Model
 {
-    public static string $tableName = 'exhibit_reviews';
+    public static $tableName = 'exhibit_reviews';
 
+    // Властивості для об'єкта (якщо потрібні, можна оголосити явно)
+    public int $id;
+    public int $exhibit_id;
+    public int $user_id;
+    public int $rating;
+    public string $comment;
+    public string $created_at;
+
+    // Конструктор для створення об'єкта з даних масиву
+    public function __construct(array $data = [])
+    {
+        foreach ($data as $key => $value) {
+            // Присвоюємо властивості, якщо вони існують
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+    /**
+     * Отримати всі відгуки для експонату у вигляді масиву об'єктів Review
+     * @param int $exhibitId
+     * @return Review[]
+     */
     public static function getByExhibitId(int $exhibitId): array
     {
         $db = Core::get()->db;
@@ -24,9 +48,17 @@ class Review extends Model
         $stmt = $db->pdo->prepare($sql);
         $stmt->bindValue(':exhibit_id', $exhibitId, \PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $reviews = [];
+        foreach ($rows as $row) {
+            $reviews[] = new self($row);  // Створюємо об'єкт Review для кожного рядка
+        }
+
+        return $reviews;
     }
 
+    // Отримати середній рейтинг (не змінюємо — це логічно залишити статичним)
     public static function getAverageRating(int $exhibitId): float
     {
         $db = Core::get()->db;
@@ -38,6 +70,7 @@ class Review extends Model
         return $avg !== null ? round((float)$avg, 2) : 0.0;
     }
 
+    // Перевірка, чи користувач уже залишив оцінку
     public static function hasUserRated(int $exhibitId, int $userId): bool
     {
         $db = Core::get()->db;
@@ -49,6 +82,7 @@ class Review extends Model
         return $stmt->fetchColumn() > 0;
     }
 
+    // Додавання нового відгуку — теж можна зробити інстанс-методом (або залишити статичним)
     public static function addReview(int $exhibitId, int $userId, int $rating, string $comment): bool
     {
         $db = Core::get()->db;
@@ -59,5 +93,18 @@ class Review extends Model
             'comment' => $comment,
             'created_at' => date('Y-m-d H:i:s')
         ]);
+    }
+
+    // Приклад інстанс-методу: відформатувати дату
+    public function getFormattedDate(string $format = 'd.m.Y H:i'): string
+    {
+        $dt = new \DateTime($this->created_at);
+        return $dt->format($format);
+    }
+
+    // Приклад інстанс-методу: короткий текст коментаря
+    public function getShortComment(int $length = 50): string
+    {
+        return mb_strimwidth($this->comment, 0, $length, '...');
     }
 }

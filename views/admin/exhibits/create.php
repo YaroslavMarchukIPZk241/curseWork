@@ -45,8 +45,24 @@
     </div>
 
     <div class="form-group">
-        <label>Зображення (шлях)</label>
-        <input type="text" name="image_path" class="form-control">
+        <label>Завантажити нове зображення</label>
+        <input type="file" name="image" accept="image/*" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Або виберіть існуюче зображення</label>
+        <select name="existing_image" class="form-control">
+            <option value="">-- Не вибрано --</option>
+            <?php
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . 'MuseumShowcase/static/uploads/Exponat/';
+            $files = is_dir($uploadDir) ? scandir($uploadDir) : [];
+            foreach ($files as $file) {
+                if (in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), ['jpg','jpeg','png','gif'])) {
+                    echo "<option value=\"$file\">$file</option>";
+                }
+            }
+            ?>
+        </select>
     </div>
 
     <button type="submit" class="btn btn-primary">Зберегти</button>

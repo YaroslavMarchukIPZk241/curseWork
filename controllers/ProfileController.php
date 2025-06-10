@@ -4,7 +4,7 @@ namespace controllers;
 use core\Template;
 use core\Controller;
 use core\Core;
-
+use models\PromoUser;
 use models\Users;
 
 class ProfileController extends Controller
@@ -36,10 +36,9 @@ class ProfileController extends Controller
 }
 public function actionEdit()
 {
-    if (!Users::isUserLogged()) {
-        return $this->redirect('profile/login');
-    }
-
+   if (!Users::isUserLogged())
+        return $this->redirect('/profile/login');
+    
     $user = Users::FindById(Users::GetCurrentUser()['id']);
     $fields = [];
 
@@ -177,5 +176,16 @@ public function actionEdit()
         var_dump($params);
     }
 
-    
+    public function actionPromo()
+{
+    if (!Users::isUserLogged())
+        return $this->redirect('/profile/login');
+
+    $userId = $_SESSION['user']['id'] ?? null;
+    $promoCodesHistory = PromoUser::getAllPromoCodesByUser($userId);
+
+    return $this->render('views/profile/promo.php', [
+        'promoCodesHistory' => $promoCodesHistory
+    ]);
+}
 }

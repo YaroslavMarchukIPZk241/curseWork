@@ -56,7 +56,21 @@ $baseUrl = Config::get()->getBaseUrl();
     header('Location: ' . $url);
     exit;
 }
+public function error(int $code = 404)
+{
+    http_response_code($code);
+    $path = "views/errors/{$code}.php";
 
+    if (file_exists($path)) {
+        ob_start(); 
+        include $path;
+        $content = ob_get_clean(); 
+        echo $content;
+    } else {
+        echo "$code - Помилка";
+    }
+    exit;
+}
     public function addErrorMessage($message = null) : void
     {
         $this->errorMessages [] = $message; 
@@ -71,4 +85,13 @@ $baseUrl = Config::get()->getBaseUrl();
     {
         return count($this->errorMessages) > 0;
     }
+public function renderPartial($viewPath, $params = [])
+{
+    extract($params);
+    ob_start();
+    require $viewPath;
+    return ob_get_clean();
+}
+
+    
 }

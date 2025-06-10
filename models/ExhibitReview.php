@@ -70,5 +70,9 @@ class ExhibitReview extends Model
         ];
         return Core::get()->db->insert(self::$tableName, $data);
     }
+   public static function deleteById($id)
+{
+    return Core::get()->db->delete(self::$tableName, ['id' => $id]);
+}
 }
 
